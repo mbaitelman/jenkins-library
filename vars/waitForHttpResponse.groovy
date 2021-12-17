@@ -16,7 +16,7 @@ def call(Map args) {
     timeout(timeoutArgs) {
         waitUntil(initialRecurrencePeriod: 10000, quiet: true) {
             response = httpRequest ( url: url, validResponseCodes: '100:599', wrapAsMultipart: false, quiet: true)
-            return ( codes.contains( response).getStatus() )
+            return codes.contains( response.getStatus() )
         }
     }
 }
