@@ -17,7 +17,7 @@ def call(Map args) {
         waitUntil(initialRecurrencePeriod: 10000, quiet: true) {
             response = httpRequest ( url: url, validResponseCodes: '100:599', wrapAsMultipart: false, quiet: true)
             echo "${response.getStatus()}"
-            echo codes
+            echo codes.toString()
             return codes.contains( response.getStatus() )
         }
     }
