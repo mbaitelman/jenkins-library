@@ -11,7 +11,7 @@
 def call(Map args) {
     String url = args.url
     int id = args.id
-    String[] codes = args.codes ?: [200]
+    def codes = args.codes ?: [200]
     def timeoutArgs = args.timeout ?: [time: 15, unit: 'MINUTES']
     timeout(timeoutArgs) {
         waitUntil(initialRecurrencePeriod: 10000, quiet: true) {
