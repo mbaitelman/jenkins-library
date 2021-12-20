@@ -38,6 +38,16 @@ def setBuildStatus(){
     }
 }
 
+/*
+This method allows for more detailed reporting on errors. 
+Based on https://github.com/jenkinsci/slack-plugin/blob/master/src/main/java/jenkins/plugins/slack/ActiveNotifier.java#L236
+All options are optional
+junitTestReportHelper.getSlackMessage(showFailures: true, showDiff: true, maxFailedTests: 5)
+showFailures = (boolean) when enabled prints out maxFailedTests count of failed tests
+maxFailedTests = (int) number of failed test messages to show
+showDiff = (boolean) when enabled shows how many more/less test failures there were (used for when multiple jobs are called with different params and the historical data isnt useful)
+*/
+
 def getSlackMessage(Map args){
     StringBuilder slackMessage = new StringBuilder()
     boolean showDiff = args.showDiff
