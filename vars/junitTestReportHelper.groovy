@@ -62,5 +62,5 @@ def getSlackMessage(Map args){
             }
         }
     }
-    return slackMessage..toString()
+    return slackMessage.toString()
 }
