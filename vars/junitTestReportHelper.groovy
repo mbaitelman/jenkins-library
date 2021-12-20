@@ -40,8 +40,8 @@ def setBuildStatus(){
 
 def getSlackMessage(Map args){
     StringBuilder slackMessage = new StringBuilder()
-    bool showDiff = args.showDiff
-    bool showFailures = args.showFailures
+    boolean showDiff = args.showDiff
+    boolean showFailures = args.showFailures
     
 
     AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
