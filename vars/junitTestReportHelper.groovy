@@ -1,25 +1,25 @@
 import hudson.tasks.test.AbstractTestResultAction
 import hudson.tasks.test.TestResult;
 
-def call() {
-    def testStatus = ""
-    AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
-    if (testResultAction != null) {
-        def total = testResultAction.totalCount
-        def failed = testResultAction.failCount
-        def skipped = testResultAction.skipCount
-        def passed = total - failed - skipped
-        testStatus = "Test Status: Total: ${total}, Skipped: ${skipped}, Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}"
-
-        if (failed == 0) {
-            currentBuild.result = 'SUCCESS'
-        } else {
-            currentBuild.result = 'UNSTABLE'
+/*
+Calling this allows for setting the build result based on the test result, not on script passing/failing
+Run in a `post { always {} }` block so script issues dont affect status. 
+```
+stage("Run Tests"){
+    steps {
+        sh "./runtests.sh"
+    }
+    post {
+        always {
+            junit "./junit.xml"
+            script {
+                junitTestReportHelper.setBuildStatus()
+            }
         }
     }
-    echo("TestStatus is:" + testStatus)
-    return testStatus.toString()
 }
+```
+*/
 
 def setBuildStatus(){
     AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
