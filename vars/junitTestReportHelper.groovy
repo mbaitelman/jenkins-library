@@ -1,4 +1,5 @@
 import hudson.tasks.test.AbstractTestResultAction
+import hudson.tasks.test.TestResult;
 
 def call() {
     def testStatus = ""
@@ -52,7 +53,6 @@ def getSlackMessage(Map args){
         if(showDiff){
             slackMessage.append(" ${testResultAction.failureDiffString}")
         }
-        int failed = action.getFailCount();
         if (failed > 0 && showFailures) {
             slackMessage.append("\nFailed Tests:\n")
             for(TestResult result : action.getFailedTests()) {
