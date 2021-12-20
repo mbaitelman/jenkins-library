@@ -56,7 +56,7 @@ def getSlackMessage(Map args){
         }
         if (failed > 0 && showFailures) {
             slackMessage.append("\nFailed Tests:\n")
-            for(TestResult result : action.getFailedTests()) {
+            for(TestResult result : testResultAction.getFailedTests()) {
                 slackMessage.append("\t").append(result.getFullDisplayName()).append(" after ")
                     .append(result.getDurationString()).append("\n");
             }
