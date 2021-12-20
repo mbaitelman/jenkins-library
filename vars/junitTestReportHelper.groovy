@@ -42,6 +42,7 @@ def getSlackMessage(Map args){
     StringBuilder slackMessage = new StringBuilder()
     boolean showDiff = args.showDiff
     boolean showFailures = args.showFailures
+    int maxFailedTests = args.maxFailedTests ?: 5
     
 
     AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
@@ -56,7 +57,9 @@ def getSlackMessage(Map args){
         }
         if (failed > 0 && showFailures) {
             slackMessage.append("\nFailed Tests:\n")
+            int count = 0;
             for(TestResult result : testResultAction.getFailedTests()) {
+                if (++count == maxFailedTests) break;
                 slackMessage.append("\t").append(result.getFullDisplayName()).append(" after ")
                     .append(result.getDurationString()).append("\n");
             }
