@@ -59,9 +59,9 @@ def getSlackMessage(Map args){
             slackMessage.append("\nFailed Tests:\n")
             int count = 0;
             for(TestResult result : testResultAction.getFailedTests()) {
-                if (++count == maxFailedTests) break;
                 slackMessage.append("\t").append(result.getFullDisplayName()).append(" after ")
                     .append(result.getDurationString()).append("\n");
+                if (++count == maxFailedTests) break;
             }
         }
     }
