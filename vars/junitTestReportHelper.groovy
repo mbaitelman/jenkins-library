@@ -24,6 +24,7 @@ def call() {
 def setBuildStatus(){
     AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
     if (testResultAction != null) {
+        def total = testResultAction.totalCount
         def failed = testResultAction.failCount
         def skipped = testResultAction.skipCount
         def passed = total - failed - skipped
